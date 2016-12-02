@@ -1,0 +1,191 @@
+<style type="text/css">
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body 
+{
+    color:#000000;
+    margin:0px;
+    font-size:100%;
+    font-family: "Nanum Gothic", sans-serif; 
+}
+
+.borderTopBottom
+{
+	border-top:solid;
+	border-bottom:solid;
+	border-color:#d0d0d0;
+}
+
+.borderUnderline
+{
+	border-bottom:solid;
+	border-width:1px;
+	border-color:#797979;
+}
+
+.borderBox
+{
+	border-top:solid;
+	border-bottom:solid;
+	border-left:solid;
+	border-right:solid;
+	border-width:1px;
+	border-color:#797979;
+}
+
+.borderBoxShadow
+{
+	border-top:solid;
+	border-bottom:solid;
+	border-left:solid;
+	border-right:solid;
+	border-width:1px;
+	border-color:#797979;
+    box-shadow:0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
+}
+
+.td_center_bgcolor
+{
+	text-align:center;
+	valign:middle;
+	background-color:#FCFCFC;
+}
+
+.table_border
+{
+	border:1px solid;
+}
+
+.container 
+{
+    background-color:#f1f1f1;
+    width:100%;
+    overflow:auto;
+    position:absolute;
+    height:100%;
+}
+
+.div_blank
+{
+    float:left;
+    width:2%;
+}
+
+.navigation
+{
+    float:left;
+    height:100%;
+    width:15%;
+}
+
+.contents
+{
+    float:left;
+    height:100%;
+    width:83%;
+}
+
+.innerContents
+{
+	width:82.5%;
+    height:93%;
+    top:50px;
+    position:absolute;
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
+    box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+a
+{
+	color:black;
+	text-decoration: none;
+}
+
+.a_underline
+{
+	color:blue;
+	text-decoration: underline;
+}
+
+.featureBanner {
+    position: relative;
+    margin: 20px
+}
+.featureBanner:before {
+    content: attr(data-content);
+    position: absolute;
+    top: 5px;
+    left: -8px;
+    padding-right: 10px;
+    color: #232323;
+    font-weight: bold;
+    height: 0px;
+    border: 15px solid #ffa200;
+    border-right-color: transparent;
+    line-height: 0px;
+    box-shadow: -0px 5px 5px -5px #000;
+    z-index: 1;
+}
+.featureBanner:after {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: -8px;
+    border: 4px solid #89540c;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.registPage
+{
+    top:50px;
+    left:50px;
+    width:90%;
+    height:80%;
+    position:relative;
+    overflow:auto;
+}
+
+.listPage
+{
+	top:35px;
+	left:30px;
+	width:96%;
+    height:93%;
+    position:relative;
+    overflow:auto;
+}
+
+.detailPage
+{
+	top:35px;
+	left:30px;
+	width:96%;
+    height:93%;
+    position:relative;
+    overflow:auto;
+}
+
+.stringTail
+{
+	width:35%;
+	left:400px;
+    height:10%;
+    top:600px;
+    position:absolute;
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: #ffffff;
+    box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+</style>
