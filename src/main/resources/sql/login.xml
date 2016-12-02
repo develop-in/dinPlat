@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="login">
+
+	<!-- 로그인 -->
+    <select id="login" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) count
+		from   sg_member
+		where  sgid = #{id}
+		and    password = #{pwd}
+	</select>
+	
+	<!-- 로그인정보 Update -->
+	<update id="setLogInInfo" parameterType="java.util.HashMap">
+		update sg_member set logontime = date_format(NOW(),'%Y%m%d%h%i%s'), 
+							 jsessionid = #{jsessionId}
+		where  sgid = #{id}
+	</update>
+	
+	
+	<!-- 로그아웃정보 Update -->
+	<update id="setLogOutInfo" parameterType="java.util.HashMap">
+		update sg_member set logontime = null, 
+							 jsessionid = null
+		where  sgid = #{sgId}
+	</update>
+	
+	
+	<!-- 이미지 List 가져오기 -->
+	<select id="getImageList" resultType="java.util.HashMap">
+		select * from sg_emoticon order by emoticonid;
+	</select>
+	
+	
+	<!-- 회원ID 중복확인 -->
+    <select id="dupCheck" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) count
+		from   sg_member
+		where  sgid = #{id}
+	</select>
+	
+	
+	<!-- 회원 -->
+	<insert id="joinMember" parameterType="java.util.HashMap">
+		insert into sg_member(sgid, password, nickName, sgmessage, emoticonid, regdate)
+		values(#{id}, #{pwd1}, #{nickName}, #{message}, #{emoticonId}, date_format(NOW(),'%Y%m%d%h%i%s'))
+	</insert>
+</mapper>

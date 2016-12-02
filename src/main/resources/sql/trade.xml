@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="trade">
+
+	<!-- 거래정보 -->
+	<select id="tradeList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select oa.*, concat(@rownum := @rownum + 1) as no
+		from  (
+			select a.tradeno as tradeNo,
+				   b.positionno as positionNo,
+				   b.positiontime as positionTime,
+				   a.stockno as stockNo,
+				   c.stockname as stockName,
+				   case b.position
+						when '1' then '매수'
+						when '2' then '매도'
+				   end as position,
+				   b.unitcost as unitCost,
+				   b.count as count,
+				   b.fee as fee,
+				   b.tradeamount as tradeAmount,
+				   a.tax as tax,
+				   a.profit as profit
+			from   sg_trade_note a
+				   left outer join sg_trade_detail b
+				   on a.tradeno = b.tradeno,
+				   sg_stock_code c
+			where  a.stockno = c.stockno
+			order by a.tradeno desc, b.positionno desc) oa, 
+			(select @rownum := 0) ob
+	</select>
+    
+    <!-- 거래정보 -->
+    <select id="tradeInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    	select a.tradeno as tradeNo, 
+    		   a.stockno as stockNo,
+    		   b.stockname as stockName,
+    		   a.tax as tax,
+    		   a.profit as profit,
+    		   a.buycause as buyCause,
+    		   a.sellcause as sellCause,
+    		   a.evaluate as evaluate
+    	from   sg_trade_note a, sg_stock_code b
+    	where  a.tradeno = #{tradeNo}
+    	and    a.stockno = b.stockno
+    </select>
+    
+    <!-- 매매List -->
+    <select id="positionList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    	select tradeno as tradeNo,
+    		   positionno as positionNo,
+    		   substr(positiontime,1,4) as positionYear,
+		       substr(positiontime,5,2) as positionMonth,
+		       substr(positiontime,7,2) as positionDay,
+		       substr(positiontime,9,2) as positionHour,
+		       substr(positiontime,11,2) as positionMinute,
+    		   case position
+					when '1' then '매수'
+					when '2' then '매도'
+			   end as positionStr,
+			   position as position,
+			   unitcost as unitCost,
+			   count as count,
+			   fee as fee,
+			   tradeamount as tradeAmount
+		from   sg_trade_detail
+		where  tradeno = #{tradeNo}    		   
+    </select>
+    
+    <!-- 거래 시작 -->
+    <insert id="startTrade" parameterType="java.util.HashMap">
+    	insert into sg_trade_note (stockno, tradesdate, buycause)
+    	values (#{stockNo}, date_format(NOW(), '%Y%m%d%H%i%s'), #{buyCause})
+    </insert>
+    
+    <!-- 거래정보 수정 -->
+    <update id="update_sg_trade_note" parameterType="java.util.HashMap">
+    	update sg_trade_note set stockno = #{stockNo},
+    							 tax = if(#{tax}='', null, #{tax}),
+    							 profit = if(#{profit} = '', null, #{profit}),
+    							 buycause = #{buyCause},
+    							 sellcause = #{sellCause},
+    							 evaluate = #{evaluate}
+    	where  tradeno = #{tradeNo}
+    </update>
+    
+    <!-- 거래 종료 -->
+    <update id="finishTrade" parameterType="java.util.HashMap">
+    	update sg_trade_note set stockno = #{stockNo},
+    							 tax = if(#{tax}='', null, #{tax}),
+    							 profit = if(#{profit} = '', null, #{profit}),
+    							 buycause = #{buyCause},
+    							 sellcause = #{sellCause},
+    							 evaluate = #{evaluate},
+    							 tradeedate = date_format(NOW(), '%Y%m%d%H%i%s')
+    	where  tradeno = #{tradeNo}
+    </update>
+    
+    
+    <select id="existPosition" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+    	select count(*) as count
+    	from   sg_trade_detail
+    	where  tradeno = #{tradeNo}
+    	and    positionno = #{positionNo}
+    </select>
+    
+    <!-- 매매정보 등록 -->
+    <insert id="insert_sg_trade_detail" parameterType="java.util.HashMap">
+    	insert into sg_trade_detail (tradeno, positiontime, position, unitcost, count, fee, tradeamount) 
+    	values (#{tradeNo}, concat(#{positionYear},#{positionMonth},#{positionDay},#{positionHour},#{positionMinute}), #{position}, #{unitCost}, #{count}, #{fee}, #{tradeAmount})
+    </insert>
+    
+    <!-- 매매정보 수정 -->
+    <update id="update_sg_trade_detail" parameterType="java.util.HashMap"> 
+    	update sg_trade_detail set positiontime = concat(#{positionYear},#{positionMonth},#{positionDay},#{positionHour},#{positionMinute}),
+    							   position = #{position},
+    							   unitcost = #{unitCost},
+    							   count = #{count},
+    							   fee = #{fee},
+    							   tradeamount = #{tradeAmount}
+    	where  positionno = #{positionNo}
+    </update>
+
+</mapper>

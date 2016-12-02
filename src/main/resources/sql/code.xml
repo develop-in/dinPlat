@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="code">
+
+	<!-- 산업군 Code -->
+	<select id="industryList" resultType="java.util.HashMap">
+		select industryid, industryname
+		from   sg_industry_code
+		order by industryname
+	</select>
+
+	<!-- KSE Code -->
+	<select id="KSEList" resultType="java.util.HashMap">
+		select kseid, ksename
+		from   sg_kse_code
+		order by ksename
+	</select>	
+	
+	<!-- FICS Code -->
+	<select id="FICSList" resultType="java.util.HashMap">
+		select ficsid, ficsname
+		from   sg_fics_code
+		order by ficsname
+	</select>	
+	
+	<!-- 테마 Code -->
+	<select id="themeList" resultType="java.util.HashMap">
+		select themeid, themename
+		from   sg_theme_code
+		order by themename
+	</select>
+	
+	<!-- seq -->
+	<insert id="getSeq" parameterType="java.util.HashMap">
+		insert into sg_seq
+		values()
+		<selectKey resultType="Integer"	keyProperty="seq" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+	</insert>
+	
+	<!-- 종목검색 -->
+	<select id="searchStock" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select stockno as stockNo, stockname as stockName
+		from   sg_stock_code
+		where  stockname like concat(#{keyworkd},'%')
+		order by stockname asc;
+	</select>
+	
+	<!-- 종목List -->
+	<select id="stockList" resultType="java.util.HashMap">
+		select stockno as stockNo, stockname as stockName
+		from   sg_stock_code
+		order by stockname asc;
+	</select>
+</mapper>
