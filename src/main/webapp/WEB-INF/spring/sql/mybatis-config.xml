@@ -7,12 +7,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
     <!-- Maven Project에서는 resources Directory 아래에 Mapper를 두어야 찾을수 있음. -->
     <mappers >
-        <mapper resource="/sql/login.xml"/>
-        <mapper resource="/sql/collect.xml"/>
-        <mapper resource="/sql/code.xml"/>
-        <mapper	resource="/sql/stock.xml"/>
-        <mapper resource="/sql/port.xml"/>
-        <mapper resource="/sql/trade.xml"/>
+        <mapper resource="/sql/category.xml"/>
+        <mapper resource="/sql/task.xml"/>
+        <mapper resource="/sql/page.xml"/>
     </mappers >
 
 </configuration>

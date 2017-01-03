@@ -39,6 +39,12 @@
 	        <property name="suffix" value=".jsp"/>
 	</bean>
 
+	<!-- 
+		File upload 관련 multipart 설정
+		pom.xml에 commons-fileupload, commons-io 포함 필요 
+	-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />		
+
 	
 	<!-- 
 		[Interceptor]

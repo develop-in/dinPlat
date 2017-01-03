@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="task">
+
+	<!-- TASK 등록 -->
+	<insert id="insert_dp_task" parameterType="java.util.HashMap">
+		insert into dp_task (task_id, category_id, task_name, description, menu_name, directory, create_time)
+		values(#{taskId}, #{categoryId}, #{taskName}, #{description}, #{menuName}, #{directory}, date_format(NOW(), '%Y%m%d%H%i%s'))
+	</insert>
+	
+	<!-- TASK 조회 -->
+	<select id="query_dp_task" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select a.task_id as taskId, a.task_name as taskName, a.category_id as categoryId, b.category_name as categoryName, a.menu_name as menuName, a.description as description, a.directory as directory,
+			   a.scenario as scenario, a.algorithm as algorithm
+		from   dp_task a, dp_category b
+		where  a.task_id = #{taskId}
+		and    a.category_id = b.category_id
+	</select>
+	
+	<!-- TASK feature 조회 -->
+	<select id="referenceList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select a.task_id as taskId, a.task_name as taskName, b.reference_id as referenceId, b.reference_type as referenceType, b.description as description, 
+			   if (substr(b.contents,1,4) = 'http', b.contents, concat('http://', b.contents)) as contents, 
+		       case reference_type
+					when '1' then 'Link'
+					when '2' then '문서'
+					when '3' then '이미지'
+					end as referenceTypeName
+		from   dp_task a, dp_task_reference b
+		where  a.task_id = #{taskId}
+		and    a.task_id = b.task_id
+	</select>
+	
+	
+	<!-- TASK List 조회 -->
+	<select id="taskList" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select a.task_id as taskId, a.task_name as taskName, a.category_id as categoryId, b.category_name as categoryName, a.menu_name as menuName, a.description as description, a.directory as directory
+		from   dp_task a, dp_category b
+		where  a.category_id = #{categoryId}
+		and    a.category_id = b.category_id
+	</select>
+	
+	<!-- TASK 수정 -->
+	<update id="update_dp_task" parameterType="java.util.HashMap">
+		update dp_task set category_id = #{categoryId},
+						   task_name = #{taskName},
+						   description = #{description},
+						   menu_name = #{menuName},
+						   directory = #{directory},
+						   update_time = date_format(NOW(), '%Y%m%d%H%i%s')
+		where  task_id = #{taskId}
+	</update>
+	
+	
+	<!-- feature 수정 -->
+	<update id="update_feature" parameterType="java.util.HashMap">
+		update dp_task set scenario = #{scenario},
+						   algorithm = #{algorithm},
+						   update_time = date_format(NOW(), '%Y%m%d%H%i%s')
+		where  task_id = #{taskId}
+	</update>
+	
+	<!-- referenceList 삭제 -->
+	<delete id="delete_dp_task_reference" parameterType="java.util.HashMap">
+		delete from dp_task_reference 
+		where  task_id = #{taskId}
+	</delete>
+	
+	<!-- referenceList 입력 -->
+	<insert id="insert_dp_task_reference" parameterType="java.util.HashMap">
+		insert into dp_task_reference (task_id, reference_type, description, contents)
+		values
+		<foreach collection="reference" item="item" separator=",">
+		(#{item.taskId}, #{item.referenceType}, #{item.description}, #{item.contents})
+		</foreach>
+	</insert>
+</mapper>

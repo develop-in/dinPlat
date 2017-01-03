@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileE {
 
 	public final static String NEW_FILE = "new";
@@ -94,5 +96,25 @@ public class FileE {
 		}
 		
 		return printWriter;
+	}
+	
+	
+	/**
+	 * WEB에서 multipart/form-data를 이용하여 File을 Upload할 경우 upload된 파일을 filePath에 write하는 Method.
+	 * @param filePath
+	 * @param multipartFile
+	 * @return
+	 * @throws Exception
+	 */
+	public static boolean writeFile (String filePath, MultipartFile multipartFile) throws Exception {
+		
+		File file = new File(filePath);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		
+		multipartFile.transferTo(file);
+		
+		return true;
 	}
 }
