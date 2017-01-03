@@ -1,0 +1,415 @@
+<style type="text/css">
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+}
+
+ul, ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+a
+{
+	color:black;
+	text-decoration: none;
+}
+
+.a_underline
+{
+	color:blue;
+	text-decoration: underline;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.header {
+	padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-box {
+	width:980px;
+	height:40px;
+	margin-right:auto;
+	margin-left:auto;
+}
+
+.header-logo {
+    float: left;
+    margin-right: 10px;
+    margin-left: -2px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.header-menu {
+    list-style: none;
+    list-style-type: none;
+    list-style-position: initial;
+    list-style-image: initial;
+}
+
+.header-menu-item {
+    display: block;
+    padding: 4px 8px;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #333;
+}
+
+.header-menu-item.plus-sign {
+    font-size: 25px;
+}
+
+.popup-menu-box {
+    display: box;
+    pointer-events: all;
+}
+
+.popup-menu {
+    position: absolute;
+    top: 5%;
+    left: 70%;
+    z-index: 100;
+    width: 160px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+
+.popup-menu-item {
+    display: block;
+    padding: 4px 10px 4px 15px;
+    padding-top: 4px;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    padding-left: 15px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.popup-menu-divider {
+    height: 1px;
+    margin: 8px 1px;
+    background-color: #e5e5e5;
+}
+
+.mouse {
+	display: block;
+    padding: 4px 10px 4px 15px;
+    padding-top: 4px;
+    padding-right: 10px;
+    padding-bottom: 4px;
+    padding-left: 15px;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mouse.over {
+	background-color: #aabbcc;
+}
+
+.mouse.out {
+	background-color: #ffffff;
+}
+
+
+
+.body {
+    width: 980px;
+    height: auto;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #aabbcc;
+}
+
+.div-5px-gap {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.div-30px-gap {
+    padding-right: 30px;
+    padding-left: 30px;
+    background-color: #aabbcc;
+}
+
+.div-30px-right-padding {
+    padding-right: 30px;
+}
+
+.width-15percent {
+	float: left;
+    width: 15%;
+}
+
+.width-20percent {
+	float: left;
+    width: 18%;
+}
+
+.width-50percent {
+	float: left;
+    width: 50%;
+}
+
+.width-80percent {
+	float: left;
+    width: 78%;
+}
+
+.width-100percent {
+	float: left;
+    width: 96%;
+}
+
+.intro {
+	width:980px;
+	height:500px;
+	margin-top: 100px;
+	margin-right:auto;
+	margin-left:auto;
+	background-color: #f5f5f5;
+}
+
+.blankslate-spacious {
+    padding: 80px 40px;
+}
+.blankslate {
+    position: relative;
+    padding: 32px;
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+.blankslate_ul {
+	list-style: none;
+    list-style-type: none;
+    list-style-position: initial;
+    list-style-image: initial;
+}
+
+.navigation {
+    margin-bottom: 15px;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+}
+
+.navigation-title {
+    position: relative;
+    display: block;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f5f5f5;
+}
+
+.navigation-item {
+    position: relative;
+    display: block;
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+}
+.navigation-item.selected {
+    font-weight: bold;
+    color: #222;
+    cursor: default;
+    background-color: #fff;
+}
+.navigation-item.selected::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    content: "";
+    background-color: #d26911;
+}
+
+
+.pagehead {
+	position: relative;
+	height: 40px;
+    margin-left: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pagehead-item {
+    width: 120px;
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+}
+.pagehead-item.selected {
+    border-top: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+    background-color: #ffffff;
+    font-weight: bold;
+    color: #222;
+    cursor: default;
+    border-top-color: #80ffff;
+}
+
+
+.view {
+    position: relative;
+    padding-top: 20px;
+    margin-left: 20px;
+}
+
+.group-box {
+	position: relative;
+    margin-bottom: 30px;
+    border-radius: 3px;
+}
+
+.group-box .heading {
+    display: block;
+    padding: 9px 10px 10px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 17px;
+    background-color: #f5f5f5;
+    border: 1px solid #d8d8d8;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+    font-weight: bold;
+}
+
+.group-box-inner {
+    padding: 10px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.textarea-box {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    padding: 10px;
+    color: #666;
+    background: #fff;
+    border: 1px solid #d8d8d8;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    min-height: 50px;
+}
+
+.div-text {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    padding: 10px;
+    color: #666;
+    background: #fff;
+}
+
+.input-box {
+	min-height: 16px;
+    padding: 6px 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    vertical-align: middle;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+    background-color: #fafafa;
+    font: inherit;
+}
+.width-650px {
+	width: 650px;
+}
+
+.width-500px {
+	width: 500px;
+}
+
+.button {
+	position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    color: #333;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #eee;
+    background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+    background-image: linear-gradient(#fcfcfc, #eee);
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.data-item-image {
+    width: 10px;
+    height: 10px;
+    padding: 0x 0x 0x 0x;
+}
+
+.data-item-title {
+	background-color: #f5f5f5;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.select-item {
+	background-color: #80ffff;
+}
+</style>

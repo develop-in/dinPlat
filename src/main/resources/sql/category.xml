@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="category">
+
+	<!-- 카테고리 List -->
+	<select id="categoryList" resultType="java.util.HashMap">
+		select category_id as categoryId,
+			   category_name as categoryName,
+			   description as description,
+			   menu_name as menuName,
+			   directory as directory
+		from   dp_category
+		order by category_name
+	</select>
+	
+	<!-- TASK List -->
+	<select id="taskList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select task_id as taskId,
+			   task_name as taskName
+		from   dp_task
+		where  category_id = #{categoryId}
+		order by task_name
+	</select>
+	
+	<!-- PAGE List -->
+	<select id="pageList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select task_id as taskId,
+			   page_id as pageId,
+			   page_name as pageName,
+			   #{taskId} as selected,
+			   link_url as linkUrl
+		from   dp_task_page
+		where  task_id = #{taskId}
+		order by page_id
+	</select>
+	
+	<!-- 카테고리 등록 -->
+	<insert id="insert_dp_category" parameterType="java.util.HashMap">
+		insert into dp_category (category_id, category_name, description, menu_name, directory, create_time)
+		values(#{categoryId}, #{categoryName}, #{description}, #{menuName}, #{directory}, date_format(NOW(), '%Y%m%d%H%i%s'))
+	</insert>
+	
+	<!-- seq -->
+	<insert id="getSeq" parameterType="java.util.HashMap">
+		insert into dp_seq
+		values()
+		<selectKey resultType="Integer"	keyProperty="seq" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+	</insert>
+	
+	<!-- 카테고리 조회 -->
+	<select id="query_dp_category" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select category_id as categoryId,
+			   category_name as categoryName,
+			   description as description,
+			   menu_name as menuName,
+			   directory as directory
+		from   dp_category
+		where  category_id = #{categoryId}
+	</select>
+	
+	<!-- 카테고리 수정 -->
+	<update id="update_dp_category" parameterType="java.util.HashMap">
+		update dp_category set category_name = #{categoryName},
+							   description = #{description}, 
+							   menu_name = #{menuName}, 
+							   directory = #{directory},
+							   update_time = date_format(NOW(), '%Y%m%d%H%i%s')
+		where category_id = #{categoryId}
+	</update>
+	
+</mapper>

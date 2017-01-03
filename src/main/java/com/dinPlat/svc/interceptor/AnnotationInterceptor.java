@@ -46,6 +46,7 @@ public class AnnotationInterceptor extends HandlerInterceptorAdapter {
 		
 			if ( contentLength > CONTENT_LENGTH_MAX )		{
 				logger.info( "CONTENT LENGTH OVER!!!" );
+				response.sendRedirect(request.getContextPath() + "/error");
 				return false;
 			}
 			

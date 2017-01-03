@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="page">
+
+	<!-- page 조회 -->
+	<select id="pageInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap"> 
+		select task_id as taskId, page_id as pageId, page_name as pageName, description as description, link_url as linkUrl, 
+			   date_format(create_time, '%Y.%m.%d %H:%i:%s') as createTime, date_format(update_time, '%Y.%m.%d %H:%i:%s') as updateTime
+		from   dp_task_page
+		where  task_id = #{taskId}
+		and    page_id = #{pageId}
+	</select>
+	
+	<!-- Max pageId -->
+	<select id="maxPage" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select ifnull(max(page_id), 0) as pageId
+		from   dp_task_page
+		where  task_id = #{taskId}
+	</select>
+	
+	<!-- page 등록 -->
+	<insert id="insert_dp_task_page" parameterType="java.util.HashMap">
+		insert into dp_task_page (task_id, page_id, page_name, description, contents_type, link_url, create_time)
+		values(#{taskId}, #{pageId}, #{pageName}, #{description}, '1', #{linkUrl}, date_format(now(), '%Y%m%d%H%i%s'))
+	</insert>
+
+	<!-- page 수정 -->
+	<update id="update_dp_task_page" parameterType="java.util.HashMap">
+		update dp_task_page set page_name = #{pageName}, description = #{description}, link_url = #{linkUrl}, update_time = date_format(now(), '%Y%m%d%H%i%s')
+		where  task_id = #{taskId}
+		and    page_id = #{pageId}
+	</update>
+</mapper>
