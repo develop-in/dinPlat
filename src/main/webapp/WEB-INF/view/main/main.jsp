@@ -12,6 +12,17 @@
 	
 <html>
 	<head>
+	
+	<title>WEB Platform</title>
+	
+	<!-- 모바일에서도 정상적으로 보여주기 위한 viewport 설정 (모든 브라우저에서 정상적으로 보이게 설정) -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+	<style type="text/css">
+		@-ms-viewport{width:device-width;}
+		@-o-viewport{width:devie-width;}
+		@viewport{width:device-width;}
+	</style>
+	
 	<link rel="stylesheet" type="text/css" href="<%=contextPath%>/static/css/frame.css"/>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="<%=contextPath%>/static/js/user/dinplat.js"></script>
