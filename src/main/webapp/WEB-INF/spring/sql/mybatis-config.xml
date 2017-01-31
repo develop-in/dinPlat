@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="/sql/category.xml"/>
         <mapper resource="/sql/task.xml"/>
         <mapper resource="/sql/page.xml"/>
+        <mapper resource="/sql/mini.xml"/>
     </mappers >
 
 </configuration>

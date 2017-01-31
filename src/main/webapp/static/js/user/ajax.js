@@ -25,6 +25,26 @@ function ajax_post (url, param, key, callback) {
 
 
 /*
+ * Post 방식 호출
+ * key : div, 에러코드 등...
+ */
+function ajax_post_none (url, param) {
+	$.ajax({ 
+		url : 			url,
+		type:			"POST",
+		data: 			param,			
+		success:function(data){
+			console.log(data);
+		},
+		error:function(jqXHR, textStatus, errorThrown) {
+			error_alert(jqXHR, textStatus, errorThrown);
+		}
+	});
+}
+
+
+
+/*
  * recursive ajax call
  */
 function ajax_post_recursive(url, param, key, callback, recursiveUrl, recursiveParam, recursiveKey, recursiveFunction, recursiveCallback) {
