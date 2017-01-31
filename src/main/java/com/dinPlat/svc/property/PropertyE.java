@@ -4,47 +4,49 @@ import java.io.FileInputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
-
+import com.dinPlat.svc.code.Config.P;
 import com.dinPlat.svc.log.DropLog;
 
 public class PropertyE {
 
-	public static Properties serviceProp = null;
-	public static Properties messageProp = null;
-	
-	public enum P {
-		SERVICE		(serviceProp, "static/service.properties"),
-		MESSAGE		(messageProp, "static/message.properties");
-		
-		private Properties properties;
-		private String path;
-		
-		P (Properties properties, String path) {
-			this.properties = properties;
-			this.path = path;
-		}
-		
-		public Properties getProperties() {
-			return properties;
-		}
-		public void setProperties(Properties properties) {
-			this.properties = properties;
-		}
-		public String getPath() {
-			return path;
-		}
-		public void setPath(String path) {
-			this.path = path;
-		}
-	}
+/*
+ * 독립적으로 구성하기 위해 ENUM을 별도 java로 분리하여 svc 패키지 아래에 둠.
+ */
+//	public static Properties serviceProp = null;
+//	public static Properties messageProp = null;
+//	
+//	public enum P {
+//		SERVICE		(serviceProp, "static/service.properties"),
+//		MESSAGE		(messageProp, "static/message.properties");
+//		
+//		private Properties properties;
+//		private String path;
+//		
+//		P (Properties properties, String path) {
+//			this.properties = properties;
+//			this.path = path;
+//		}
+//		
+//		public Properties getProperties() {
+//			return properties;
+//		}
+//		public void setProperties(Properties properties) {
+//			this.properties = properties;
+//		}
+//		public String getPath() {
+//			return path;
+//		}
+//		public void setPath(String path) {
+//			this.path = path;
+//		}
+//	}
 	
 	/**
 	 * Contructor
 	 * @param filePath
 	 * @throws Exception
 	 */
-	private static Properties createProperties (P p) throws Exception {
+	private static Properties createProperties (P p) {
 		
 		Properties properties = new Properties();
 		p.setProperties(properties);
@@ -71,7 +73,43 @@ public class PropertyE {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String getValue (P p, String key) throws Exception {
+	public static String getStringValue (P p, String key) {
+		Properties properties = getProperty(p);
+		
+		String value = getValue(properties, key);
+		
+		return value;
+	}
+	
+	public static boolean getbooleanValue (P p, String key) {
+		Properties properties = getProperty(p);
+		
+		String value = getValue(properties, key);
+		
+		if (value.equals("true")) return true;
+		
+		return false;
+	}
+	
+	public static int getintValue (P p, String key) {
+		Properties properties = getProperty(p);
+		
+		String value = getValue(properties, key);
+		
+		return Integer.parseInt(value);
+	}
+	
+	
+	public static long getlongValue (P p, String key) {
+		Properties properties = getProperty(p);
+		
+		String value = getValue(properties, key);
+		
+		return Integer.parseInt(value);
+	}
+	
+	
+	private static Properties getProperty (P p) {
 		Properties properties = null;
 		
 		if (p.getProperties() == null) {
@@ -82,7 +120,12 @@ public class PropertyE {
 			properties = p.getProperties();
 		}
 	
-		return properties.getProperty(key);
+		return properties;
 
+	}
+	
+	private static String getValue(Properties properties, String key) {
+		return properties.getProperty(key);
+		
 	}
 }

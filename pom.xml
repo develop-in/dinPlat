@@ -232,6 +232,14 @@
 			<version>2.0-beta6</version>
 		</dependency>
 
+
+		<!-- memcached -->
+		<dependency>
+    		<groupId>com.whalin</groupId>
+    		<artifactId>Memcached-Java-Client</artifactId>
+    		<version>3.0.2</version>
+    	</dependency>
+		
 	</dependencies>	
 
 </project>

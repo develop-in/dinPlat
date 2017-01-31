@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.2.0.201303060654-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.8.3.201612191259-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
@@ -9,6 +9,11 @@
 	<configs>
 		<config>src/main/resources/spring/application-config.xml</config>
 	</configs>
+	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/application-config.xml</config>
+		<config>src/main/webapp/WEB-INF/mvc-config.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/db-config.xml</config>
+	</autoconfigs>
 	<configSets>
 	</configSets>
 </beansProjectDescription>

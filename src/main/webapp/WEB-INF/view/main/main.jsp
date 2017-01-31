@@ -26,7 +26,11 @@
 	<link rel="stylesheet" type="text/css" href="<%=contextPath%>/static/css/frame.css"/>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="<%=contextPath%>/static/js/user/dinplat.js"></script>
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=1a7e3de62f89b96f4ab563ff0da3245a"></script>
+	<script src="//apis.daum.net/maps/maps3.js?apikey=1a7e3de62f89b96f4ab563ff0da3245a"></script>
+	<script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+	
 	
 
 	<script>
